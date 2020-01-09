@@ -9,7 +9,7 @@ class Question extends Model
     //
 
 
-    protected $fillabale=['title','body'];
+    protected $fillable=['title','body'];
     public function user(){
         return $this->belongsTo(User::class);
 

@@ -8,6 +8,9 @@ use App\Http\Requests\AskQuestionRequest;
 
 class QuestionController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -76,11 +79,12 @@ class QuestionController extends Controller
     public function edit($id)
     {
         $question=Question::find($id);
-        if(\Gate::denies('update-question',$question))
-        {
-            abort(403,"Access denied");   
+        // if(\Gate::denies('update-question',$question))
+        // {
+        //     abort(403,"Access denied");   
 
-        }
+        // }
+        $this->authorize("update", $question);
         return view('questions.edit',compact('question'));
         
        
@@ -99,11 +103,12 @@ class QuestionController extends Controller
     {
         //
         $question=Question::find($id);
-        if(\Gate::denies('update-question',$question))
-        {
-            abort(403,"Access denied");   
+        // if(\Gate::denies('update-question',$question))
+        // {
+        //     abort(403,"Access denied");   
 
-        }
+        // }
+        $this->authorize("update", $question);
         $question->update($request->only('title','body'));
         return redirect('/questions')->with('success','your question has been updated');
     }
@@ -117,11 +122,12 @@ class QuestionController extends Controller
     public function destroy($id)
     {
         $question=Question::find($id);
-        if(\Gate::denies('delete-question',$question))
-        {
-            abort(403,"Access denied");   
+        // if(\Gate::denies('delete-question',$question))
+        // {
+        //     abort(403,"Access denied");   
 
-        }
+        // }
+        $this->authorize("delete", $question);
         $question->delete();
         return redirect('/questions')->with('success','your question has been deleted');
     }

@@ -33,10 +33,10 @@
             <div class="col-4"></div>
             <div class="col-4" class="ml-auto">
                 
-                   @include('shared._author',['model'=>$answer,
+                   {{-- @include('shared._author',['model'=>$answer,
                    'label'=>'answered'])
-                   
-                
+                    --}}
+                    <user-info :model="{{$answer}}" label="Answered"></user-info>
             </div>
         </div>
 

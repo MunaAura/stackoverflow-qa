@@ -9,6 +9,9 @@ require('./fontawesome');
 
 
 window.Vue = require('vue');
+import VueIziToast from 'vue-izitoast';
+import 'izitoast/dist/css/izitoast.min.css';
+Vue.use(VueIziToast);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
